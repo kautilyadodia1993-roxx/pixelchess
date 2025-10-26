@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pixel Chess</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>♟️ Pixel Chess</h1>
+    <div class="pill">
+      <label>Mode
+        <select id="modeSelect">
+          <option value="pvp">Player vs Player</option>
+          <option value="pvai" selected>Player vs AI</option>
+        </select>
+      </label>
+      <label>AI Plays
+        <select id="aiSideSelect">
+          <option value="black" selected>Black</option>
+          <option value="white">White</option>
+        </select>
+      </label>
+      <button id="startGameBtn" class="btn-accent">Start Game</button>
+      <button id="passBtn" title="Tap to pass the turn">Pass Turn</button>
+      <button id="undoBtn">Undo</button>
+      <div class="sound-wrap">
+        <label class="sound-label">Sound</label>
+        <div class="switch on" id="muteSwitch"><div class="knob"></div></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Left Graveyard (desktop) / Top (mobile) -->
+    <section class="panel" id="whiteGrave" data-title="White Graveyard">
+      <h3>White Graveyard</h3>
+      <div class="captured" id="capturedBlack"></div>
+    </section>
+
+    <!-- Chessboard -->
+    <section class="panel board-panel">
+      <div class="board-wrap">
+        <canvas id="board" width="640" height="640"></canvas>
+
+        <div class="hud">
+          <div class="clock" id="whiteClock">White ⏱ <b id="whiteTime">45</b>s</div>
+          <div class="clock" id="turnBadge">Turn: <b id="turnText">White</b></div>
+          <div class="clock" id="blackClock">Black ⏱ <b id="blackTime">45</b>s</div>
+        </div>
+
+        <div class="footer">
+          Standard chess rules • 45s per turn • Pass Turn only after a move.
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Graveyard (desktop) / Bottom (mobile) -->
+    <section class="panel" id="blackGrave" data-title="Black Graveyard">
+      <h3>Black Graveyard</h3>
+      <div class="captured" id="capturedWhite"></div>
+    </section>
+  </main>
+
+  <!-- Promotion Modal -->
+  <div id="promoModal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <h3>Promote Pawn</h3>
+      <p>Choose a piece to promote to:</p>
+      <div class="grid4" id="promoChoices"></div>
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="bgm" loop src="assets/audio/bgm.mp3"></audio>
+  <audio id="sfx-move" src="assets/audio/move.wav"></audio>
+  <audio id="sfx-capture" src="assets/audio/capture.wav"></audio>
+  <audio id="sfx-tick" src="assets/audio/timer.wav"></audio>
+  <audio id="sfx-error" src="assets/audio/error.wav"></audio>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
